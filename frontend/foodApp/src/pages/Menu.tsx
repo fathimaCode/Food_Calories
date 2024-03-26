@@ -1,8 +1,13 @@
-import React from 'react'
+
+import MenuList from '../components/MenuList'
+import NavBar from '../components/NavBar'
 
 function Menu() {
   return (
-    <div>Menu</div>
+    <>
+     <NavBar/>
+     <MenuList/>
+    </>
   )
 }
 

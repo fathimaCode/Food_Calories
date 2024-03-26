@@ -7,7 +7,7 @@ def connection():
                            user = "root",
                            passwd = "",
                            port=3306,
-                           db = " foodapp")
+                           db = "foodapp")
     c = conn.cursor()
 
     return c, conn		

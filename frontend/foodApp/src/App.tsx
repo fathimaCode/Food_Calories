@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Admin from './pages/Admin'
 import Menu from './pages/Menu'
+import AddFood from './pages/AddFood'
+import CartPage from './pages/CartPage'
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
     <Route path='/' element={<Home/>}></Route>
     <Route path='/menu' element={<Menu/>}></Route>
     <Route path='/dashboard' element={<Dashboard/>}></Route>
+    <Route path='/addFood' element={<AddFood/>}></Route>
+    <Route path='/cart' element={<CartPage/>}></Route>
     <Route path='/admin' element={<Admin/>}></Route>
     </Routes>
     </>
