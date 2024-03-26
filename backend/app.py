@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
+import numpy as np
+from joblib import dump, load
+
 from datetime import datetime
 from dbconnect import *
 app = Flask(__name__)
@@ -20,6 +23,14 @@ def foodList():
         print(info)
         return jsonify(info)
 
+@app.route('/predictCalories', methods=["POST"])
+def predictCalories():
+    if request.method == 'POST':
+        loaded_model = load('xgboost_calories_model.joblib')
+        input_value = np.array([40,78,160,0]).reshape(1, -1)
+        out_calories = loaded_model.predict(input_value)
+        print(out_calories)
+        return out_calories
 @app.route('/uploadImage', methods=["POST"])
 def uploadImage():
     message=''

@@ -1,9 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { Carts } from '../models/carts';
 import NavBar from '../components/NavBar';
+import axios from 'axios';
 
 function CartPage() {
     const [carts, setCartItem] = useState<Carts[]>([]);
+    const [name, setName] = useState('');
+    const [height, setHeight] = useState('');
+    const [weight, setWeight] = useState('');
+    const [age, setAge] = useState('');
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setName(e.target.value);
+      };
+      const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setWeight(e.target.value);
+      };
+      const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setHeight(e.target.value);
+      };
+      const handleAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAge(e.target.value);
+      };
     useEffect(() => {
         const cartData = localStorage.getItem("cart");
         if(cartData){
@@ -13,6 +30,27 @@ function CartPage() {
        
         
     }, []);
+    function predictCalories(): React.MouseEventHandler<HTMLButtonElement>  {
+       return ()=>{
+        const user_data ={
+            "age":age,
+             "weight":weight,
+             "height":height
+        }
+        axios
+          .post('http://127.0.0.1:5000/predictCalories', user_data)
+          .then((response: { data: any; }) => {
+            console.log(response)
+          })
+          .catch((error: any) => {
+            // Handle error here
+            console.error('There was a problem creating the user:', error);
+            
+          });
+        console.log(name)
+       }
+    }
+
   return (
     <>
     <NavBar/>
@@ -54,11 +92,16 @@ function CartPage() {
             <div className='userDetails'>
                 <p>User Information</p>
                 <div className='userInfo'>
-                    <input type="text" placeholder='username'/>
-                    <input type="number" placeholder='age'/>
-                    <input type="number" placeholder='weight'/>
-                    <input type="number" placeholder='height'/>
-                    <button className='predictBtn'>Predict Calories</button>
+                    <input type="text" placeholder='username' 
+                     value={name}
+                   onChange={handleNameChange}/>
+                    <input type="number" placeholder='age'  value={age}
+                   onChange={handleAgeChange}/>
+                    <input type="number" placeholder='weight'  value={weight}
+                   onChange={handleWeightChange}/>
+                    <input type="number" placeholder='height'  value={height}
+                   onChange={handleHeightChange}/>
+                    <button className='predictBtn' onClick={predictCalories()}>Predict Calories</button>
                 </div>
             </div>
             </div>
