@@ -2,6 +2,7 @@ import axios from "axios";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import AdminNavBar from "../components/AdminNavBar";
 
 function AddFood() {
  
@@ -42,6 +43,7 @@ function AddFood() {
         formData.append('quantity', quantity);
         formData.append('imageFile', file.name);
         formData.append('price', price);
+        formData.append('calories', calories);
         try {
              await axios.post('http://127.0.0.1:5000/uploadImage', formData, {
               headers: {
@@ -82,8 +84,9 @@ function AddFood() {
 
     return (
         <>
+         <AdminNavBar/>
             <div className="FoodContainer">
-                <h1>Add Food Product</h1>
+               
                 <form onSubmit={handleSubmit} className="foodForm">
                     <input type="text" placeholder="Title" value={title} onChange={handleTitleChange} />
                     <input type="text" placeholder="Quantity" value={quantity} onChange={handleQuantityChange} />

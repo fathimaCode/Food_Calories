@@ -12,6 +12,7 @@
   --secondary-color:#fff;
   --black-color:#020202;
   --green-color:#119705;
+  --red-color:#f73302;
 }
 a{
   color: var(--black-color);
@@ -90,11 +91,11 @@ h2{
 }
 .admin_dashboard{
   height: 500px;
-  width: 500px;
-  margin: 5% auto;
+  width: 800px;
+  margin: 1% auto;
 }
 .FoodContainer{
-  margin: 8% auto;
+  margin: 2% auto;
   width: 500px;
 }
 .FoodContainer h1{
@@ -274,4 +275,61 @@ span{
 .predictBtn:hover{
   background-color: var(--green-color);
   color: var(--secondary-color);
+}
+.predict{
+  background-color: var(--secondary-color);
+  color: var(--black-color);
+  font-size: 1.2em;
+}
+.predict.success{
+  
+  color: var(--green-color);
+  
+}
+.predict.failed{
+  
+  color: var(--red-color);
+  
+}
+.totalContainer{
+  display: flex;
+}
+.totalContainer p{
+  margin-left: 150px;
+}
+.purchaseBtn{
+  width: 200px;
+  border: none;
+  background-color: var(--primary-color);
+  padding: 10px;
+  margin: 30px;
+  cursor: pointer;
+}
+.purchaseBtn:hover{
+  background-color: var(--green-color);
+  color: var(--secondary-color);
+}
+select{
+  width: 300px;
+  padding: 10px;
+  margin: 6px 10px;
+}
+.ri-edit-box-fill{
+  color: var(--primary-color);
+  cursor: pointer;
+}
+.MyBills{
+  margin: 2% auto;
+
+}
+.user_details{
+  margin: 5% auto;
+  width: 800px;
+  overflow: auto;
+  height: 600px;
+}
+.user_bill{
+  margin-left: 550px;
+  font-size: 1.5em;
+  
 }

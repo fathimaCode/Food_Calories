@@ -5,6 +5,6 @@ export interface Product{
     quantity:number;
     img:String;
     created_at:String;
-    calories:String;
+    calories:number;
     
 }

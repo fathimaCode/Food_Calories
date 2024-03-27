@@ -1,9 +1,9 @@
-import { Product } from "./product";
 
-export interface Carts{
+
+export interface PurchaseItem{
     quantity:number;
     created_at:String;
-    product: Product;
+    productId: number;
     subtotal:number;
     calories:number;
 }

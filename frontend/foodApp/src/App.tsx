@@ -6,6 +6,8 @@ import Admin from './pages/Admin'
 import Menu from './pages/Menu'
 import AddFood from './pages/AddFood'
 import CartPage from './pages/CartPage'
+import UpdateStock from './pages/UpdateStock'
+import BillPage from './pages/BillPage'
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
     <Route path='/addFood' element={<AddFood/>}></Route>
     <Route path='/cart' element={<CartPage/>}></Route>
     <Route path='/admin' element={<Admin/>}></Route>
+    <Route path='/update' element={<UpdateStock/>}></Route>
+    <Route path='/myBills' element={<BillPage/>}></Route>
     </Routes>
     </>
   )

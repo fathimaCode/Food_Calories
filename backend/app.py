@@ -2,9 +2,11 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
+from xgboost import XGBRegressor
 import numpy as np
 from joblib import dump, load
-
+import uuid
+import json
 from datetime import datetime
 from dbconnect import *
 app = Flask(__name__)
@@ -23,14 +25,75 @@ def foodList():
         print(info)
         return jsonify(info)
 
-@app.route('/predictCalories', methods=["POST"])
+def productQuantityValue(id):
+    productQuery = 'select quantity from product where id =%s' % \
+                    (id)
+    info = recoredselect(productQuery)
+    quantity_values = [quantity[0] for quantity in info]
+    return quantity_values[0]
+@app.route('/predictCalories', methods=["GET","POST"])
 def predictCalories():
     if request.method == 'POST':
+        user_data = request.json
+        age = int(user_data.get('age'))
+        weight = int(user_data.get('weight'))
+        height = int(user_data.get('height'))
+        gender = int(user_data.get('gender'))
+        print(user_data)
         loaded_model = load('xgboost_calories_model.joblib')
-        input_value = np.array([40,78,160,0]).reshape(1, -1)
+        input_value = np.array([age,weight,height,gender]).reshape(1, -1)
         out_calories = loaded_model.predict(input_value)
-        print(out_calories)
-        return out_calories
+        print(out_calories[0])
+        return str(out_calories[0])
+def updateQuantity(id,stockCount):
+    history = 'update product set quantity=%s where id =%s' % \
+                    (stockCount,id)
+    updatequery(history)
+
+@app.route('/updateStock', methods=["GET","POST"])
+def updateStock():
+    if request.method == 'POST':
+        user_data = request.json
+        id = int(user_data.get('id'))
+        stock = int(user_data.get('stock'))
+        res = updateQuantity(id,stock)
+        print(res)
+        return ""
+@app.route('/purchase', methods=["GET","POST"])
+def purchase():
+    if request.method == 'POST':
+        purchase_data = request.json
+        
+        purchase_id = str(uuid.uuid4())
+        username = purchase_data['username']
+        predictedCalories = purchase_data['predictedCalories']
+        orderdCalories = purchase_data['orderdCalories']
+        totalAmount = purchase_data['totalAmount']
+        age = purchase_data['age']
+        items= purchase_data['items']
+        weight = purchase_data['weight']
+        height = purchase_data['height']
+        
+        for item in items:
+            print(item['quantity'])
+            history = 'insert into  history(purchase_id,quantity,created_at,productId,subtotal,calories) values("%s","%s","%s","%s","%s","%s")' % \
+                    (purchase_id,item['quantity'],item['created_at'],item['productId'],item['subtotal'],item['calories'])
+            original_qt=int(productQuantityValue(item['productId'])) 
+            purchase_qty= int(item['quantity']) 
+            print("originalqty:")
+            final_qty=original_qt-purchase_qty
+            print(original_qt-purchase_qty)
+            updateQuantity(item['productId'],final_qty)
+            inserquery(history)
+
+        current_date = datetime.now().date()
+        test = 'insert into purchase(name,purchase_id,predicted_calories,ordered_calories,total_amount,age,weight,height,purchased_at) values("%s","%s","%s","%s","%s","%s","%s","%s","%s")' % \
+                    (username,purchase_id,predictedCalories,orderdCalories,totalAmount,age,weight,height,current_date)
+        
+        inserquery(test)
+        
+    response = jsonify({'message': 'added'})
+    return response
 @app.route('/uploadImage', methods=["POST"])
 def uploadImage():
     message=''
