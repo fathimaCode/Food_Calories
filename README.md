@@ -1,4 +1,4 @@
-![image](https://github.com/fathimaCode/Food_Calories/assets/142009811/a29b7553-f9d1-48af-82d8-b77d0d1b3920)This is food calories predicted app implemented in React and Flask Api.I developed in local.
+This is food calories predicted app implemented in React and Flask Api.I developed in local.
 Screenshots
 Home Page:
 ![image](https://github.com/fathimaCode/Food_Calories/assets/142009811/417158db-7e39-4ca5-ae5e-4446f5cf72be)
@@ -34,7 +34,8 @@ Stock maintance below 20
 ![image](https://github.com/fathimaCode/Food_Calories/assets/142009811/0dcc03d8-7e36-4263-92c3-0aa8ae9fa62e)
 
 Billing Information of user
-![Uploading image.png…]()
+![image](https://github.com/fathimaCode/Food_Calories/assets/142009811/a29b7553-f9d1-48af-82d8-b77d0d1b3920)
+
 
 
 
