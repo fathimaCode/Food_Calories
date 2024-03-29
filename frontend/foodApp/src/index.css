@@ -333,3 +333,6 @@ select{
   font-size: 1.5em;
   
 }
+.color_change{
+  color:var(--red-color)
+}

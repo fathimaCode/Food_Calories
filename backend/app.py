@@ -25,6 +25,30 @@ def foodList():
         print(info)
         return jsonify(info)
 
+@app.route('/toprated', methods=["GET"])
+def toprated():
+    if request.method == 'GET':
+        productQuery = "select p.img as product_image, p.title as title, h.quantity as  quantity from product p join (select sum(quantity) as quantity, productId from history group by productId order by quantity desc)h on p.id= h.productId"
+        info = recoredselect(productQuery)
+        print(info)
+        return jsonify(info)
+
+@app.route('/billingInfo', methods=["GET"])
+def billingInfo():
+    if request.method == 'GET':
+        productQuery = "select purchase.purchase_id,purchase.name, product.title,product.price, history.quantity,history.subtotal from history inner join purchase on purchase.purchase_id= history.purchase_id inner join product on product.id= history.productId"
+        info = recoredselect(productQuery)
+        print(info)
+        return jsonify(info)
+
+@app.route('/stockInfo', methods=["GET"])
+def stockInfo():
+    if request.method == 'GET':
+        productQuery = "select * from product where product.quantity<20"
+        info = recoredselect(productQuery)
+        print(info)
+        return jsonify(info)
+
 def productQuantityValue(id):
     productQuery = 'select quantity from product where id =%s' % \
                     (id)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 10:38 AM
+-- Generation Time: Mar 29, 2024 at 07:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,7 +66,10 @@ INSERT INTO `history` (`id`, `purchase_id`, `quantity`, `created_at`, `productId
 (22, 'd70c411e-e042-48b6-b', '3', '2024-03-27T09:25:33.', '3', '375', '600'),
 (23, '1390c7d2-13df-4b76-9', '3', '2024-03-27T09:31:07.', '3', '375', '600'),
 (24, '1390c7d2-13df-4b76-9', '3', '2024-03-27T09:31:09.', '4', '450', '300'),
-(25, '1390c7d2-13df-4b76-9', '3', '2024-03-27T09:31:12.', '12', '540', '135');
+(25, '1390c7d2-13df-4b76-9', '3', '2024-03-27T09:31:12.', '12', '540', '135'),
+(26, '5d6bc676-607a-4bcd-8', '5', '2024-03-29T06:01:12.', '3', '625', '1000'),
+(27, '5d6bc676-607a-4bcd-8', '3', '2024-03-29T06:01:13.', '4', '450', '300'),
+(28, '4ae2de4c-18d9-4771-b', '3', '2024-03-29T06:03:39.', '9', '450', '1500');
 
 -- --------------------------------------------------------
 
@@ -91,13 +94,13 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`id`, `title`, `quantity`, `price`, `img`, `created_at`, `calories`) VALUES
 (1, 'Pizza', 100, '50', '123.jpg', '2024-03-26', 100),
 (2, 'Batter Fried', 95, '100', 'batter-fried-chicken.jpg', '2024-03-26', 200),
-(3, 'cowboy pie', 44, '125', 'Cowboy-pie-cef67be.jpg', '2024-03-26', 200),
-(4, 'Skillet Polenta in Creamy', 522, '150', '36.jpg', '2024-03-26', 100),
+(3, 'cowboy pie', 39, '125', 'Cowboy-pie-cef67be.jpg', '2024-03-26', 200),
+(4, 'Skillet Polenta in Creamy', 519, '150', '36.jpg', '2024-03-26', 100),
 (5, 'Fish fried', 50, '155', 'images (3).jfif', '2024-03-26', 200),
 (6, 'Pasta Yummy', 100, '222', 'images (4).jfif', '2024-03-26', 50),
 (7, 'spaghetti', 25, '500', 'one-pot-spaghetti.jpg', '2024-03-26', 100),
 (8, 'Chinese Rice Combo', 20, '158', '253.jpg', '2024-03-26', 50),
-(9, 'Garlic Beard', 15, '150', 'download (6).jfif', '2024-03-27', 500),
+(9, 'Garlic Beard', 12, '150', 'download (6).jfif', '2024-03-27', 500),
 (10, 'Pixel_Food', 100, '250', 'ouu.jpeg', '2024-03-27', 600),
 (11, 'Fiber Food', 150, '155', 'download (7).jfif', '2024-03-27', 200),
 (12, 'Chicken tikka', 147, '180', 'chicken.jpg', '2024-03-27', 45);
@@ -137,7 +140,9 @@ INSERT INTO `purchase` (`id`, `name`, `purchase_id`, `predicted_calories`, `orde
 (9, 'sds', '2f0754ee-5e1d-4ffb-a', '1405.8646', '1400', '800', '50', '11', '11', '2024-03-27'),
 (10, 'sds', '06c02b54-f1ab-49be-b', '3146.9338', '1400', '775', '15', '150', '155', '2024-03-27'),
 (11, 'Naveeb', 'd70c411e-e042-48b6-b', '1842.4414', '1600', '875', '45', '50', '154', '2024-03-27'),
-(12, 'Praveen', '1390c7d2-13df-4b76-9', '1815.85', '1035', '1365', '15', '40', '167', '2024-03-27');
+(12, 'Praveen', '1390c7d2-13df-4b76-9', '1815.85', '1035', '1365', '15', '40', '167', '2024-03-27'),
+(13, 'Ruban', '5d6bc676-607a-4bcd-8', '2174.5242', '1300', '1075', '50', '68', '168', '2024-03-29'),
+(14, 'Bavan', '4ae2de4c-18d9-4771-b', '2113.0977', '1500', '450', '89', '80', '168', '2024-03-29');
 
 --
 -- Indexes for dumped tables
@@ -169,7 +174,7 @@ ALTER TABLE `purchase`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -181,7 +186,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `purchase`
 --
 ALTER TABLE `purchase`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

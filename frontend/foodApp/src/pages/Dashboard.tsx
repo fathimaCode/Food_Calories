@@ -65,10 +65,37 @@ function Dashboard() {
     <AdminNavBar/>
     <div className="admin_dashboard">
      
-      <div className="listFood">
-      
-          <div >
-          <TableContainer component={Paper}>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell align="right">Title</TableCell>
+            <TableCell align="right">Quantity</TableCell>
+            <TableCell align="right">Price</TableCell>
+            <TableCell align="right">Created_at</TableCell>
+            <TableCell align="right">Created_at</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        {productList.map(item=>(
+            <TableRow
+            key={item._id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              
+              <TableCell align="right"><img src={`http://127.0.0.1:5000/static/product/${item.img}`} alt="" height={50} width={50}/></TableCell>
+              <TableCell align="right">{item.title}</TableCell>
+              <TableCell align="right">{item.quantity}</TableCell>
+              <TableCell align="right">{item.price}</TableCell>
+              <TableCell align="right">{item.created_at}</TableCell>
+              <TableCell align="right"><i className="ri-edit-box-fill" onClick={productInfo(item.quantity,item._id)}></i></TableCell>
+            </TableRow>
+         ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+      <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -99,9 +126,6 @@ function Dashboard() {
       </Table>
     </TableContainer>
     
-          </div>
-       
-      </div>
     </div>
     </>
   )

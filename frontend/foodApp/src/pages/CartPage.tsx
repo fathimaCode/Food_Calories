@@ -10,6 +10,7 @@ import { BillView } from '../models/billView';
 
 function CartPage() {
     const [carts, setCartItem] = useState<Carts[]>([]);
+   
     const [name, setName] = useState('');
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
@@ -36,6 +37,11 @@ function CartPage() {
       };
     useEffect(() => {
         const cartData = localStorage.getItem("cart");
+        console.log("line 39: "+cartData)
+        if(cartData){
+          const initialCartItems = JSON.parse(cartData) as Carts[]
+          console.log(initialCartItems)
+        }
         if(cartData){
             const parsedCartData = JSON.parse(cartData) as Carts[]
             let cc =0;
@@ -78,10 +84,18 @@ function CartPage() {
     }
     function deleteCartItem(productId: number): React.MouseEventHandler<HTMLButtonElement> {
       return ()=>{
+        let updatedOrderCalories = 0;
+    let updatedBill = 0;
         const updatedCarts = carts.filter(item => item.product._id !== productId);
         setCartItem(updatedCarts);
-        
+        updatedCarts.forEach(item => {
+          updatedOrderCalories += item.calories;
+          updatedBill += item.subtotal;
+        });
         localStorage.setItem("cart", JSON.stringify(updatedCarts));
+        setorderCalories(updatedOrderCalories);
+        setbills(updatedBill);
+
       }
     }
   
@@ -146,6 +160,7 @@ function CartPage() {
           }
           const billDataString = JSON.stringify(billData);
           localStorage.setItem("myBill",billDataString)
+          localStorage.setItem("cart","")
           redirect('/myBills')
         })
         .catch((error: any) => {

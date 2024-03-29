@@ -31,13 +31,20 @@ function MenuList() {
 
     useEffect(() => {
         const storedCartString = localStorage.getItem('cart');
-        if (storedCartString) {
-            const storedCart: Carts[] = JSON.parse(storedCartString);
-            setCart(storedCart);
+        //console.log("cart exisitng Items:"+storedCartString)
+        if(storedCartString){
+            const initialCartItems = JSON.parse(storedCartString) as Carts[]
+            setCart(prev => ([
+                ...prev, ...initialCartItems
+            ]));
+        }
+        else{
+            console.log("no data")
         }
     }, []); // Empty dependency array to only run once on component mount
 
     useEffect(() => {
+
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
@@ -62,7 +69,7 @@ function MenuList() {
                 subtotal: quantityValue * price!,
                 calories: quantityValue * calori!
             }];
-
+        
             setCart(prev => ([
                 ...prev, ...updateCart
             ]));
