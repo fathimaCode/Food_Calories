@@ -336,3 +336,25 @@ select{
 .color_change{
   color:var(--red-color)
 }
+@media screen and (max-width: 1400px) {
+  .menuContainer{
+ 
+    height: 800px;
+    margin: 10px;
+    display: grid;
+    overflow: auto;
+    grid-template-columns: 1fr 1fr 1fr ;
+    gap:10px
+  }
+}
+@media screen and (max-width: 729px) {
+  .menuContainer{
+ 
+    height: 800px;
+    margin: 10px;
+    display: grid;
+    overflow: auto;
+    grid-template-columns: 1fr 1fr  ;
+    gap:10px
+  }
+}
